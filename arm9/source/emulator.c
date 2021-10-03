@@ -365,6 +365,8 @@ start(Uxn *u)
 		// X+Y in debugger mode resets tticks_peak
 		if ((keysHeld() & (KEY_X | KEY_Y)) == (KEY_X | KEY_Y))
 			memset(tticks_peak, 0, sizeof(tticks_peak));
+		tticks = timer_ticks(0);
+#endif
 
 		int held = keysDown() | keysHeld();
 		// On the first frame that L+R are held
@@ -380,8 +382,6 @@ start(Uxn *u)
 			evaluxn(u, 0x0100);
 		}
 
-		tticks = timer_ticks(0);
-#endif
 		doctrl(u);
 		domouse(u);
 #ifdef DEBUG_PROFILE
